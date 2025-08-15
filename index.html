@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ES–ZH 基础语库 · PWA 测试</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#1976D2" />
+</head>
+<body>
+  <header>
+    <h1>ES–ZH 基础语库 · PWA 测试</h1>
+    <div class="notice">首次打开需要联网以缓存 <code>sql.js</code> 与 <code>wasm</code>；安装后可离线使用。</div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <input id="q" type="text" placeholder="搜索西语或中文（例如：trabajar / 工作 / estar）" />
+      <div class="tabs">
+        <div class="tab active" data-tab="dict">词典</div>
+        <div class="tab" data-tab="grammar">语法</div>
+      </div>
+      <div style="margin-top: 12px; display:flex; gap:8px;">
+        <button id="btnSearch">搜索 (Enter)</button>
+        <button id="btnClear" style="background:#64748b;">清空</button>
+      </div>
+      <div id="status" class="meta" style="margin-top:10px;">准备就绪</div>
+    </div>
+
+    <div id="results" class="card"></div>
+
+    <div class="card">
+      <h3>使用提示</h3>
+      <p>支持：<kbd>Enter</kbd> 搜索，<kbd>Tab</kbd> 切换「词典/语法」。</p>
+      <p>此 PWA 仅用于测试，查询基于 SQLite (sql.js) 的 <code>LIKE</code> 模糊匹配。</p>
+    </div>
+  </div>
+
+  <footer>© ES–ZH 基础语库 测试 · 用于演示（不含外部联网翻译）。</footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+    }
+  </script>
+  <!-- CDN sql.js (1.8.0): will be cached by SW after first load -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js" integrity="sha512-EqkCqH3YttB13p39K6q9Nf3UQJ3T7E5s7j2OvoR3Rkfv38J9ki1Vvmi9cG6G3Qfl1mUOnBAGQW3F2bvw0YyDJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="app.js"></script>
+</body>
+</html>
